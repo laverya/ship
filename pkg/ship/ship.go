@@ -39,10 +39,10 @@ type Ship struct {
 	ChannelID      string
 	InstallationID string
 	PlanOnly       bool
+	Runbook   string
 
 	Daemon    daemontypes.Daemon
 	Resolver  *specs.Resolver
-	Runbook   string
 	Client    *specs.GraphQLClient
 	UI        cli.Ui
 	State     state.Manager
