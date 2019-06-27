@@ -612,15 +612,26 @@ workflows:
 
       - test
       - pacts
-      - windows_build_test
-      - docs
+
+      - windows_build_test:
+          requires:
+          - test
+          - pacts
+      - docs:
+          requires:
+          - test
+          - pacts
+      - ui:
+          requires:
+          - test
+          - pacts
+
       - integration_base
       - integration_init
       - integration_init_edit
       - integration_unfork
       - integration_init_app
       - integration_update
-      - ui
 
       - is_upstream:
           filters:
@@ -724,18 +735,33 @@ workflows:
               ignore: /.*/
 
       - windows_build_test:
+          requires:
+          - test
+          - pacts
+          filters:
+            tags:
+              only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
+            branches:
+              ignore: /.*/
+      - docs:
+          requires:
+          - test
+          - pacts
+          filters:
+            tags:
+              only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
+            branches:
+              ignore: /.*/
+      - ui:
+          requires:
+          - test
+          - pacts
           filters:
             tags:
               only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
             branches:
               ignore: /.*/
 
-      - docs:
-          filters:
-            tags:
-              only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
-            branches:
-              ignore: /.*/
       - integration_base:
           filters:
               tags:
@@ -767,12 +793,6 @@ workflows:
             branches:
               ignore: /.*/
       - integration_update:
-          filters:
-            tags:
-              only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
-            branches:
-              ignore: /.*/
-      - ui:
           filters:
             tags:
               only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
