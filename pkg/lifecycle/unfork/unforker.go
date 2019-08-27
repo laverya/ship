@@ -15,8 +15,8 @@ import (
 	"github.com/spf13/afero"
 	yaml "gopkg.in/yaml.v3"
 	"k8s.io/client-go/kubernetes/scheme"
-	kustomizepatch "sigs.k8s.io/kustomize/pkg/patch"
-	"sigs.k8s.io/kustomize/pkg/types"
+	kustomizepatch "sigs.k8s.io/kustomize/v3/pkg/patch"
+	"sigs.k8s.io/kustomize/v3/pkg/types"
 
 	"github.com/replicatedhq/ship/pkg/api"
 	"github.com/replicatedhq/ship/pkg/constants"

@@ -13,8 +13,8 @@ import (
 	"github.com/spf13/afero"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
-	"sigs.k8s.io/kustomize/pkg/patch"
-	"sigs.k8s.io/kustomize/pkg/types"
+	"sigs.k8s.io/kustomize/v3/pkg/patch"
+	"sigs.k8s.io/kustomize/v3/pkg/types"
 )
 
 type testFile struct {

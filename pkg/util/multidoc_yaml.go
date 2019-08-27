@@ -10,7 +10,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
 	yaml "gopkg.in/yaml.v3"
-	"sigs.k8s.io/kustomize/pkg/types"
+	"sigs.k8s.io/kustomize/v3/pkg/types"
 )
 
 // this function is not perfect, and has known limitations. One of these is that it does not account for `\n---\n` in multiline strings.

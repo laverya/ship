@@ -9,9 +9,9 @@ import (
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
 	yaml "gopkg.in/yaml.v3"
-	"sigs.k8s.io/kustomize/pkg/gvk"
-	kustomizepatch "sigs.k8s.io/kustomize/pkg/patch"
-	k8stypes "sigs.k8s.io/kustomize/pkg/types"
+	"sigs.k8s.io/kustomize/v3/pkg/gvk"
+	kustomizepatch "sigs.k8s.io/kustomize/v3/pkg/patch"
+	k8stypes "sigs.k8s.io/kustomize/v3/pkg/types"
 
 	"github.com/replicatedhq/ship/pkg/api"
 	"github.com/replicatedhq/ship/pkg/constants"
