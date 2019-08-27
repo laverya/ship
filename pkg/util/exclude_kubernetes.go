@@ -116,8 +116,8 @@ func ExcludeKubernetesPatch(fs afero.Afero, basePath string, excludedResource re
 
 	newJSONPatches := []patch.Json6902{}
 	for _, jsonPatch := range kustomization.PatchesJson6902 {
-		if excludedResource.Gvk().Equals(jsonPatch.Target.Gvk) {
-			if jsonPatch.Target.Name == excludedResource.Name() {
+		if excludedResource.Gvk.Equals(jsonPatch.Target.Gvk) {
+			if jsonPatch.Target.Name == excludedResource.Name {
 				// don't add to new patch list
 				continue
 			}

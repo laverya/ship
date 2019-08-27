@@ -37,7 +37,7 @@ func NewKubernetesResources(in []byte) ([]*resource.Resource, error) {
 
 func ResIDs(in []*resource.Resource) (generated []resid.ResId) {
 	for _, thisResource := range in {
-		generated = append(generated, thisResource.Id())
+		generated = append(generated, thisResource.CurId())
 	}
 	return
 }
