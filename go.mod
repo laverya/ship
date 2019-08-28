@@ -43,7 +43,7 @@ require (
 	github.com/go-test/deep v1.0.1
 	github.com/gobuffalo/packr v1.30.1 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
-	github.com/golang/mock v1.2.0
+	github.com/golang/mock v1.3.1
 	github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db // indirect
 	github.com/google/certificate-transparency-go v1.0.21 // indirect
 	github.com/google/go-github/v18 v18.0.0
@@ -96,8 +96,10 @@ require (
 	github.com/zclconf/go-cty v0.0.0-20181017232614-01c5aba823a6 // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	go.uber.org/dig v1.3.0
-	golang.org/x/crypto v0.0.0-20190621222207-cc06ce4a13d4
+	golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586
+	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297 // indirect
 	golang.org/x/oauth2 v0.0.0-20181120190819-8f65e3013eba
+	golang.org/x/sys v0.0.0-20190826190057-c7b8b68b1456 // indirect
 	google.golang.org/appengine v1.3.0 // indirect
 	google.golang.org/grpc v1.21.0
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
