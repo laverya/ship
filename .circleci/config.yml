@@ -657,18 +657,27 @@ workflows:
             - build_binary
             - e2e_setup
 
-      - test
-      - lint
       - pacts
-      - windows_build_test
-      - docs
+      - test
+      - lint:
+          requires:
+            - test
+      - windows_build_test:
+          requires:
+            - test
+      - docs:
+          requires:
+            - test
+      - ui:
+          requires:
+            - test
+
       - integration_base
       - integration_init
       - integration_init_edit
       - integration_unfork
       - integration_init_app
       - integration_update
-      - ui
 
       - is_upstream:
           filters:
@@ -766,6 +775,8 @@ workflows:
               ignore: /.*/
 
       - lint:
+          requires:
+            - test
           filters:
             tags:
               only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
@@ -780,6 +791,8 @@ workflows:
               ignore: /.*/
 
       - windows_build_test:
+          requires:
+            - test
           filters:
             tags:
               only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
@@ -787,6 +800,8 @@ workflows:
               ignore: /.*/
 
       - docs:
+          requires:
+            - test
           filters:
             tags:
               only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
@@ -829,6 +844,8 @@ workflows:
             branches:
               ignore: /.*/
       - ui:
+          requires:
+            - test
           filters:
             tags:
               only: /^v[0-9]+(\.[0-9]+)*(-.*)*/
