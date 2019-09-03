@@ -139,7 +139,7 @@ type Kustomization struct {
 
 	// Inventory appends an object that contains the record
 	// of all other objects, which can be used in apply, prune and delete
-	Inventory *Inventory `json:"inventory,omitempty" yaml:"inventory:omitempty"`
+	Inventory *Inventory `json:"inventory,omitempty" yaml:"inventory,omitempty"`
 }
 
 //go:generate stringer -type=GarbagePolicy
@@ -331,6 +331,9 @@ type PatchJson6902 struct {
 
 	// relative file path for a json patch file inside a kustomization
 	Path string `json:"path,omitempty" yaml:"path,omitempty"`
+
+	// inline patch string
+	Patch string `json:"patch,omitempty" yaml:"patch,omitempty"`
 }
 
 // PatchTarget represents the kubernetes object that the patch is applied to

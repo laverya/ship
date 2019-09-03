@@ -950,9 +950,7 @@ metadata:
 				},
 				{
 					name: "/another/kustomization.yaml",
-					data: `kind: ""
-apiversion: ""
-resources:
+					data: `resources:
 - another-collector.yaml
 - subdir/Deployment-redis-collector-two.yaml
 - subdir/Deployment-redis-collector.yaml

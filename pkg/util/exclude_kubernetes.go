@@ -9,7 +9,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
 	yaml "gopkg.in/yaml.v3"
-	"sigs.k8s.io/kustomize/v3/pkg/patch"
 	"sigs.k8s.io/kustomize/v3/pkg/resid"
 	"sigs.k8s.io/kustomize/v3/pkg/types"
 )
@@ -103,6 +102,8 @@ func ExcludeKubernetesResource(fs afero.Afero, basePath string, excludedResource
 		}
 	}
 
+	// handle bases in resources
+
 	return nil, fmt.Errorf("unable to find resource %s in %s or its bases", excludedResource, basePath)
 }
 
@@ -114,7 +115,7 @@ func ExcludeKubernetesPatch(fs afero.Afero, basePath string, excludedResource re
 		return errors.Wrapf(err, "get kustomization for %s", basePath)
 	}
 
-	newJSONPatches := []patch.Json6902{}
+	newJSONPatches := []types.PatchJson6902{}
 	for _, jsonPatch := range kustomization.PatchesJson6902 {
 		if excludedResource.Gvk.Equals(jsonPatch.Target.Gvk) {
 			if jsonPatch.Target.Name == excludedResource.Name {
@@ -126,7 +127,7 @@ func ExcludeKubernetesPatch(fs afero.Afero, basePath string, excludedResource re
 	}
 	kustomization.PatchesJson6902 = newJSONPatches
 
-	newMergePatches := []patch.StrategicMerge{}
+	newMergePatches := []types.PatchStrategicMerge{}
 	for _, mergePatch := range kustomization.PatchesStrategicMerge {
 		matches, err := mergePatchMatches(fs, basePath, string(mergePatch), excludedResource)
 		if err != nil {
@@ -138,6 +139,30 @@ func ExcludeKubernetesPatch(fs afero.Afero, basePath string, excludedResource re
 		}
 	}
 	kustomization.PatchesStrategicMerge = newMergePatches
+
+	newGenericPatches := []types.Patch{}
+	for _, patch := range kustomization.Patches {
+		if patch.Target != nil {
+			// match as we would a json patch
+			if excludedResource.Gvk.Equals(patch.Target.Gvk) {
+				if patch.Target.Name == excludedResource.Name {
+					// don't add to new patch list
+					continue
+				}
+			}
+		} else {
+			// match as we would a strategic merge patch
+			matches, err := mergePatchMatches(fs, basePath, patch.Path, excludedResource)
+			if err != nil {
+				return errors.Wrapf(err, "check if patch matches excluded resource")
+			}
+			if matches {
+				continue
+			}
+		}
+		newGenericPatches = append(newGenericPatches, patch)
+	}
+	kustomization.Patches = newGenericPatches
 
 	for _, base := range kustomization.Bases {
 		err = ExcludeKubernetesPatch(fs, filepath.Join(basePath, base), excludedResource)
@@ -211,6 +236,8 @@ func UnExcludeKubernetesResource(fs afero.Afero, basePath string, unExcludedReso
 			return UnExcludeKubernetesResource(fs, newBase, updatedResource)
 		}
 	}
+
+	// handle bases in resources
 
 	return fmt.Errorf("unable to find resource %s in %s or its bases", unExcludedResource, basePath)
 }

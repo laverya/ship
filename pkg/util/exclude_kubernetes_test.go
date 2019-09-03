@@ -53,9 +53,7 @@ resources:
 			outputFiles: []fileStruct{
 				{
 					name: "base/kustomization.yaml",
-					data: `kind: ""
-apiversion: ""
-resources:
+					data: `resources:
 - notmyresource.yaml
 `,
 				},
@@ -174,8 +172,7 @@ resources:
 				},
 				{
 					name: "another/base/kustomization.yaml",
-					data: `kind: ""
-apiversion: ""
+					data: `{}
 `,
 				},
 				{

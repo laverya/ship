@@ -119,6 +119,6 @@ require (
 	k8s.io/kubernetes v1.14.3 // indirect
 	k8s.io/utils v0.0.0-20190529001817-6999998975a7 // indirect
 	sigs.k8s.io/kustomize v2.0.3+incompatible // indirect
-	sigs.k8s.io/kustomize/v3 v3.1.0
+	sigs.k8s.io/kustomize/v3 v3.1.1-0.20190829221700-119ff5af7370
 	vbom.ml/util v0.0.0-20170409195630-256737ac55c4 // indirect
 )

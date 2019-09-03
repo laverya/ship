@@ -995,7 +995,7 @@ sigs.k8s.io/kustomize/pkg/image
 sigs.k8s.io/kustomize/pkg/patch
 sigs.k8s.io/kustomize/pkg/expansion
 sigs.k8s.io/kustomize/pkg/transformers/config/defaultconfig
-# sigs.k8s.io/kustomize/v3 v3.1.0
+# sigs.k8s.io/kustomize/v3 v3.1.1-0.20190829221700-119ff5af7370
 sigs.k8s.io/kustomize/v3/k8sdeps/kunstruct
 sigs.k8s.io/kustomize/v3/pkg/resource
 sigs.k8s.io/kustomize/v3/pkg/patch
